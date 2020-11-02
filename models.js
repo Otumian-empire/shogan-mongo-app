@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 // connect to a database, name of database after localhost/
 mongoose.connect("mongodb://localhost/mongotut_db", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 })
 
 // very connection
@@ -18,8 +19,15 @@ mongoose.connection
 
 // user schema Object
 const userSchemaStructure = {
-    password: String,
-    email: String
+    password: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    }
 }
 
 // mongoose schema

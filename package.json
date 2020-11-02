@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "mocha test.js"
+    "test": "mocha --exit test.js"
   },
   "keywords": [],
   "author": "",
