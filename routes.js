@@ -13,7 +13,6 @@ router.get("/", function (req, res) {
         })
 })
 
-
 router.get("/:email", function (req, res) {
     const email = req.params.email
 
@@ -50,7 +49,16 @@ router.post("/", function (req, res) {
 
 router.put("/:email", function (req, res) {
     const email = req.params.email
-    return res.json({ email })
+    const newEmail = req.body.newEmail
+
+    User.findOneAndUpdate({ email }, { email: newEmail })
+        .then(() => {
+            return res.json({ "msg": "User updatd successfully" })
+        })
+        .catch(errData => {
+            console.log(errData)
+            return res.json({ errData })
+        })
 })
 
 router.delete("/:email", function (req, res) {
@@ -59,6 +67,18 @@ router.delete("/:email", function (req, res) {
     User.findOneAndDelete({ email })
         .then(() => {
             return res.json({ "msg": "User deleted successfully" })
+        })
+        .catch(errData => {
+            console.log(errData)
+            return res.json({ errData })
+        })
+})
+
+router.delete("/", function (req, res) {
+
+    User.remove()
+        .then(() => {
+            return res.json({ "msg": "Deleted Users successfully" })
         })
         .catch(errData => {
             console.log(errData)
